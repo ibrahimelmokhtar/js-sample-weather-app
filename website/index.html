@@ -31,23 +31,24 @@
 
     <!-- Main Application -->
     <main>
-      <section class="section__container zip">
-        <h2 class="section__title">Zipcode</h2>
-        <label for="zip">Enter Zipcode here:</label>
-        <input type="text" id="zip" placeholder="Enter zip code here ...">
-      </section>
+      <div id="user__inputs__container">
+        <section class="section__container zipcode__section">
+          <h2 class="section__title">Enter Zipcode here:</h2>
+          <input type="text" id="zip" placeholder="Enter zip code here ...">
+        </section>
 
-      <section class="section__container feel">
-        <h2 class="section__title">Feeling</h2>
-        <label for="feelings">How are you feeling today?</label>
-        <textarea class="myInput" id="feelings" placeholder="Enter your feelings here ..." rows="9" cols="50"></textarea>
-        <button id="generate" type="submit">
-          <i class="fas fa-cogs fa-2x"></i>
-          <span>Generate</span>
-        </button>
-      </section>
+        <section class="section__container feeling__section">
+          <h2 class="section__title">Feeling</h2>
+          <label for="feelings">How are you feeling today?</label>
+          <textarea class="myInput" id="feelings" placeholder="Enter your feelings here ..." rows="9" cols="50"></textarea>
+          <button id="generate" type="submit">
+            <i class="fas fa-cogs fa-2x"></i>
+            <span>Generate</span>
+          </button>
+        </section>
+      </div>
 
-      <section class="section__container entry">
+      <section class="section__container display__section">
         <h2 class="section__title">Most Recent Entry</h2>
         <div id="entryHolder">
           <h3 id="date">.</h3>
