@@ -161,5 +161,24 @@ main button:hover {
 /* ************************************************************** */
 /* ********************   Display Section   ********************* */
 /* ************************************************************** */
-/* section.display__section {
-} */
+section.display__section {
+    align-self: center;
+    margin-bottom: 10px;
+    width: 80vw;
+    height: 70%;
+}
+
+section.display__section div#entry__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #2c4755;
+}
+
+/* ************************************************************** */
+/* *************************   Footer   ************************* */
+/* ************************************************************** */
+footer {
+}
