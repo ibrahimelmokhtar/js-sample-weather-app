@@ -46,6 +46,11 @@ main {
 
     background-color: tomato;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: initial;
 }
 
 section.section__container {
@@ -86,6 +91,8 @@ main div#user__inputs__container {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+
+    position: relative;
 }
 
 /* ************************************************************** */
@@ -98,7 +105,8 @@ section.zipcode__section {
     align-items: center;
 }
 
-section.zipcode__section input {
+section.zipcode__section input,
+section.feeling__section textarea {
     color: #2c4755;
 
     padding: 10px;
@@ -115,8 +123,43 @@ section.feeling__section {
 }
 
 /* ************************************************************** */
+/* ********************   Generate Button   ********************* */
+/* ************************************************************** */
+main button {
+    background-color: #2c4755;
+    color: #ffffff;
+
+    font-weight: 600;
+
+    width: 150px;
+    padding: 8px;
+    margin-top: 15vh;
+
+    border: 5px solid #2c4755;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    transition-duration: 0.5s;
+    transition-property: background-color, color;
+}
+
+main button span {
+    font-weight: 600;
+}
+
+main button:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #2c4755;
+}
+
+
+/* ************************************************************** */
 /* ********************   Display Section   ********************* */
 /* ************************************************************** */
-section.display__section {
-    /* display: none; */
-}
+/* section.display__section {
+} */
