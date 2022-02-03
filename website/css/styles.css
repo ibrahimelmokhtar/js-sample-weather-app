@@ -159,6 +159,8 @@ main button:hover {
 /* ********************   Display Section   ********************* */
 /* ************************************************************** */
 section.display__section {
+    display: none;
+
     align-self: center;
     margin-bottom: 10px;
     width: 80vw;

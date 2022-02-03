@@ -59,7 +59,7 @@ const extractDataToPost = (userData, webAPIData) => {
     return combinedData;
 };
 
-//  Display appropriate error message.
+// Display appropriate error message.
 const handleErrors = (error) => {
     console.log(`error: ${error}`);
 };
@@ -87,7 +87,8 @@ const generateNewEntry = async (userData) => {
                 // get data from local server:
                 getData('/all')
                     .then(dataFromServer => {
-                        console.log(dataFromServer);
+                        // update the UI with the fetched data:
+                        updateUI(dataFromServer);
                     });
             });
     } catch (error) {
@@ -134,6 +135,8 @@ const postData = async (url, data) => {
 
     try {
         const response = await fetch(url, requestHeader);
+
+        // convert the response data into json data:
         const newDataEntry = await response.json();
 
         return newDataEntry;
@@ -146,12 +149,33 @@ const postData = async (url, data) => {
 const getData = async (url) => {
     try {
         const response = await fetch(url);
+
+        // convert the response data into json data:
         const dataFromServer = await response.json();
 
         return dataFromServer;
     } catch (error) {
         handleErrors(error);
     }
+};
+
+// Update UI with the final desired data:
+const updateUI = (dataFromServer) => {
+    // obtain main container element that contains the displayed data:
+    const displaySection = document.querySelector('.display__section');
+
+    // obtain required elements to be manipulated:
+    const dateDisplayed = document.querySelector('.display__section h3#date');
+    const tempDisplayed = document.querySelector('.display__section h3#temp');
+    const contentDisplayed = document.querySelector('.display__section h3#content');
+
+    // update the displayed values:
+    dateDisplayed.textContent = dataFromServer.date;
+    tempDisplayed.textContent = dataFromServer.tempInFahrenheit;
+    contentDisplayed.textContent = dataFromServer.userResponse;
+
+    // show the main container that contains the displayed data:
+    displaySection.style.display = 'block';
 };
 
 /**
