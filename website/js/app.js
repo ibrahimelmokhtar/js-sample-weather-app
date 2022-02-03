@@ -14,6 +14,11 @@ const inputZipcode = document.querySelector('#zip');
 const inputFeeling = document.querySelector('#feelings');
 const btnGenerate = document.querySelector('#generate');
 
+const tempUnit = document.querySelector('#temp__unit__selection');
+
+// Data obtained from local server:
+let dataFromServer = {};
+
 /**
  * End of Global Variables.
  * Start of Helper Functions.
@@ -64,6 +69,39 @@ const handleErrors = (error) => {
     console.log(`error: ${error}`);
 };
 
+// Convert Fahrenheit degree into Celsius degree.
+const convertToCelsius = () => {
+    return ((dataFromServer.tempInFahrenheit-32)*(5/9)).toFixed(2);
+};
+
+// Remove (active__degree) class.
+const removeActiveUnit = () => {
+    for (let i=0; i<tempUnit.children.length; i++){
+        if (tempUnit.children[i].classList.contains('active__degree')) {
+            tempUnit.children[i].classList.remove('active__degree');
+        }
+    }
+};
+
+// Change the unit of the displayed temperature.
+const changeTempUnit = (event) => {
+    // Obtain the required element for displaying temp value:
+    const tempDisplayed = document.querySelector('.display__section span#temp__value');
+
+    switch (event.target.id) {
+        case 'temp__Fahrenheit':
+            removeActiveUnit();
+            event.target.classList.add('active__degree');
+            tempDisplayed.textContent = dataFromServer.tempInFahrenheit;
+            break;
+        case 'temp__Celsius':
+            removeActiveUnit();
+            event.target.classList.add('active__degree');
+            tempDisplayed.textContent = convertToCelsius();
+            break;
+    }
+};
+
 /**
  * End of Helper Functions.
  * Start of Main Finctions.
@@ -86,9 +124,9 @@ const generateNewEntry = async (userData) => {
 
                 // get data from local server:
                 getData('/all')
-                    .then(dataFromServer => {
+                    .then(() => {
                         // update the UI with the fetched data:
-                        updateUI(dataFromServer);
+                        updateUI();
                     });
             });
     } catch (error) {
@@ -151,22 +189,21 @@ const getData = async (url) => {
         const response = await fetch(url);
 
         // convert the response data into json data:
-        const dataFromServer = await response.json();
+        dataFromServer = await response.json();
 
-        return dataFromServer;
     } catch (error) {
         handleErrors(error);
     }
 };
 
 // Update UI with the final desired data:
-const updateUI = (dataFromServer) => {
+const updateUI = () => {
     // obtain main container element that contains the displayed data:
     const displaySection = document.querySelector('.display__section');
 
     // obtain required elements to be manipulated:
     const dateDisplayed = document.querySelector('.display__section h3#date');
-    const tempDisplayed = document.querySelector('.display__section h3#temp');
+    const tempDisplayed = document.querySelector('.display__section h3#temp span#temp__value');
     const contentDisplayed = document.querySelector('.display__section h3#content');
 
     // update the displayed values:
@@ -185,6 +222,10 @@ const updateUI = (dataFromServer) => {
 
 // Event listener for the (Generate) button:
 btnGenerate.addEventListener('click', captureUserData);
+
+// Event listener for temperature unit selection:
+tempUnit.addEventListener('click', changeTempUnit);
+
 
 /**
  * End of Event Listeners.

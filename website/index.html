@@ -55,9 +55,19 @@
       <section class="section__container display__section">
         <h2 class="section__title">Most Recent Entry:</h2>
         <div id="entry__container">
-          <h3 id="date"></h3>
-          <h3 id="temp"></h3>
-          <h3 id="content"></h3>
+          <h3 id="date">date</h3>
+
+          <h3 id="temp">
+            <span id="temp__value"></span>
+            <span id="temp__symbol">&deg;</span>
+            <div id="temp__unit__selection">
+              <span id="temp__Fahrenheit" class="active__degree">F</span>
+              <span>/</span>
+              <span id="temp__Celsius">C</span>
+            </div>
+          </h3>
+
+          <h3 id="content">content</h3>
         </div>
       </section>
     </main>
