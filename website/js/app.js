@@ -77,13 +77,19 @@ const generateNewEntry = async (userData) => {
     // fetch data from web API:
     try {
         fetchWebData(baseURL, zipCode, apiKey)
-        .then(webAPIData => {
-            // construct desired data object to be posted:
-            const combinedData = extractDataToPost(userData, webAPIData);
+            .then(webAPIData => {
+                // construct desired data object to be posted:
+                const combinedData = extractDataToPost(userData, webAPIData);
 
-            // post constructed data:
-            postData('/addEntry', combinedData);
-        });
+                // post constructed data:
+                postData('/addEntry', combinedData);
+
+                // get data from local server:
+                getData('/all')
+                    .then(dataFromServer => {
+                        console.log(dataFromServer);
+                    });
+            });
     } catch (error) {
         handleErrors(error);
     }
@@ -137,7 +143,16 @@ const postData = async (url, data) => {
 };
 
 // Function to GET Project Data:
+const getData = async (url) => {
+    try {
+        const response = await fetch(url);
+        const dataFromServer = await response.json();
 
+        return dataFromServer;
+    } catch (error) {
+        handleErrors(error);
+    }
+};
 
 /**
  * End of Main Functions.

@@ -39,10 +39,13 @@ const listening = () => {
 
 const server = app.listen(port, listening);
 
-// Initialize GET '/all' route with a callback function:
-
 // Callback function to complete GET '/all':
+const getEntry = (req, res) => {
+    res.send(projectData);
+};
 
+// Initialize GET '/all' route with a callback function:
+app.get('/all', getEntry);
 
 // Callback function to complete POST '/addEntry':
 const postNewEntry = (req, res) => {
