@@ -117,7 +117,23 @@ const fetchWebData = async (baseURL, zipCode, apiKey) => {
 
 // Function to POST data:
 const postData = async (url, data) => {
-    console.log(data);
+    const requestHeader = {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    try {
+        const response = await fetch(url, requestHeader);
+        const newDataEntry = await response.json();
+
+        return newDataEntry;
+    } catch (error) {
+        handleErrors(error);
+    }
 };
 
 // Function to GET Project Data:
