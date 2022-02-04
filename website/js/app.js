@@ -60,6 +60,7 @@ const extractDataToPost = (userData, webAPIData) => {
         date: date,
         userResponse: userData.feeling,
         place: `${webAPIData.name}, ${webAPIData.sys.country}`,
+        weatherDescription: webAPIData.weather['0'].description,
     };
 
     return combinedData;
@@ -207,12 +208,14 @@ const updateUI = () => {
     const tempDisplayed = document.querySelector('.display__section h3#temp span#temp__value');
     const contentDisplayed = document.querySelector('.display__section h3#content');
     const placeDisplayed = document.querySelector('.display__section h3#weather__place');
+    const descriptionDisplayed = document.querySelector('.display__section h3#weather__description');
 
     // update the displayed values:
     dateDisplayed.textContent = dataFromServer.date;
     tempDisplayed.textContent = dataFromServer.tempInFahrenheit;
     contentDisplayed.textContent = dataFromServer.userResponse;
     placeDisplayed.textContent = dataFromServer.place;
+    descriptionDisplayed.textContent = dataFromServer.weatherDescription;
 
 
     // show the main container that contains the displayed data:
