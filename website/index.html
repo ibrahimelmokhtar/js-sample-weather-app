@@ -32,16 +32,37 @@
     <!-- Main Application -->
     <main>
       <div id="user__inputs__container">
-        <!-- Zip Code Section -->
-        <section class="section__container zipcode__section">
-          <h2 class="section__title">Enter Zipcode here:</h2>
-          <input type="text" id="zip" placeholder="Enter zip code here ...">
+        <!-- Inputs Section -->
+        <section class="section__container location__section">
+          <h2 class="section__title">Select an option:</h2>
+
+          <!-- Zip Code Input -->
+          <div class="active__input">
+            <input type="radio" name="input__selection" id="zip__selected" value="zipcode" checked>
+            <label for="zip__selected">zip code:</label>
+            <input type="text" id="zip" placeholder="Enter zip code here ...">
+          </div>
+
+          <!-- Latitude and Longitude Inputs -->
+          <div>
+            <input type="radio" name="input__selection" id="coords__selected" value="coords">
+            <label for="coords__selected">lat:</label>
+            <input type="text" id="latitude" placeholder="Enter latitude here ...">
+            <label for="coords__selected">, lon:</label>
+            <input type="text" id="longitude" placeholder="Enter longitude here ...">
+          </div>
+
+          <!-- Get Current Location Input -->
+          <button id="current__location" type="submit" title="Get Current Location">
+            <i class="fas fa-map-marked-alt fa-2x"></i>
+            <span>Current Location</span>
+          </button>
         </section>
 
         <!-- Feeling Section -->
         <section class="section__container feeling__section">
           <h2 class="section__title">How are you feeling today?</h2>
-          <textarea class="myInput" id="feelings" placeholder="Enter your feelings here ..." rows="6" cols="50"></textarea>
+          <textarea id="feelings" placeholder="Enter your feelings here ..." rows="6" cols="50"></textarea>
         </section>
 
         <!-- Generate Button -->
@@ -54,32 +75,33 @@
       <!-- Entry Display Section -->
       <section class="section__container display__section">
         <h2 class="section__title">Most Recent Entry:</h2>
+
         <div id="entry__container">
           <div class="row__displayed">
-            <h3 id="date"></h3>
+            <h3 id="date">date_placeholder</h3>
 
             <h3 id="temp">
-              <span id="temp__value"></span>
+              <span id="temp__value">temp_placeholder</span>
               <span id="temp__symbol">&deg;</span>
-              <div id="temp__unit__selection">
+              <span id="temp__unit__selection">
                 <span id="temp__Fahrenheit" class="active__degree">F</span>
                 <span>/</span>
                 <span id="temp__Celsius">C</span>
-              </div>
+              </span>
             </h3>
 
             <h3 id="weather__icon">
-              <img src="" alt="Weather Icon">
+              <img src="http://image_placeholder.com" alt="Weather Icon">
             </h3>
           </div>
 
           <div class="row__displayed">
-            <h3 id="weather__place"></h3>
-            <h3 id="weather__description"></h3>
+            <h3 id="weather__place">place_placeholder</h3>
+            <h3 id="weather__description">description_placeholder</h3>
           </div>
 
           <div class="row__displayed">
-            <h3 id="content"></h3>
+            <h3 id="content">feeling_placeholder</h3>
           </div>
         </div>
       </section>

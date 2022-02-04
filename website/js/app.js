@@ -244,7 +244,6 @@ btnGenerate.addEventListener('click', captureUserData);
 // Event listener for temperature unit selection:
 tempUnit.addEventListener('click', changeTempUnit);
 
-
 /**
  * End of Event Listeners.
  */
