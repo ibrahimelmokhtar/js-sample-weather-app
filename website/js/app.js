@@ -61,6 +61,7 @@ const extractDataToPost = (userData, webAPIData) => {
         userResponse: userData.feeling,
         place: `${webAPIData.name}, ${webAPIData.sys.country}`,
         weatherDescription: webAPIData.weather['0'].description,
+        weatherIcon: webAPIData.weather['0'].icon,
     };
 
     return combinedData;
@@ -102,6 +103,14 @@ const changeTempUnit = (event) => {
             tempDisplayed.textContent = convertToCelsius();
             break;
     }
+};
+
+// Get the source URL for the weather icon.
+const getWeatherIconSrc = () => {
+    const weatherIconCode = dataFromServer.weatherIcon;
+    const weatherIconSrc = `http://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
+
+    return weatherIconSrc;
 };
 
 /**
@@ -209,6 +218,7 @@ const updateUI = () => {
     const contentDisplayed = document.querySelector('.display__section h3#content');
     const placeDisplayed = document.querySelector('.display__section h3#weather__place');
     const descriptionDisplayed = document.querySelector('.display__section h3#weather__description');
+    const iconDisplayed = document.querySelector('.display__section h3#weather__icon img');
 
     // update the displayed values:
     dateDisplayed.textContent = dataFromServer.date;
@@ -216,6 +226,7 @@ const updateUI = () => {
     contentDisplayed.textContent = dataFromServer.userResponse;
     placeDisplayed.textContent = dataFromServer.place;
     descriptionDisplayed.textContent = dataFromServer.weatherDescription;
+    iconDisplayed.setAttribute('src', getWeatherIconSrc());
 
 
     // show the main container that contains the displayed data:
