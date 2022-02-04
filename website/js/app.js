@@ -10,8 +10,6 @@ const apiKey = `${apiToken}&units=imperial`;
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather';
 
 // Obtain specific elements from the DOM:
-const inputZipcode = document.querySelector('#zip');
-const inputFeeling = document.querySelector('#feelings');
 const btnGenerate = document.querySelector('#generate');
 
 const tempUnit = document.querySelector('#temp__unit__selection');
@@ -71,19 +69,35 @@ const activateInputFields = (event) => {
 
 // Capture data entered by the user from user interface.
 const captureUserData = () => {
-    // capture user inputs from the website:
+    // create an object to capture user inputs from the website:
     const userData = {
-        zipCode: inputZipcode.value,
-        feeling: inputFeeling.value,
+        zipCode: '',
+        latitude: '',
+        longitude: '',
+        feeling: '',
     };
 
-    // check input is valid:
-    if (userData.zipCode !== '') {
-        // generate new entry using the entered data:
-        generateNewEntry(userData);
+    // obtain the user feelings from DOM into user data object:
+    const inputFeeling = document.querySelector('#feelings');
+    userData.feeling = inputFeeling.value;
+
+    // Obtain input elements from the DOM:
+    const activeInputContainer = userInputSelection.querySelector('div.active__input');
+    const activeTextInputs = activeInputContainer.querySelectorAll('input[type="text"]');
+
+    // capture the activated input fields:
+    if (activeTextInputs.length === 1) {
+        userData.zipCode = activeTextInputs[0].value;
     }
     else {
-        console.log('zip code is NOT specified ...');
+        userData.latitude = activeTextInputs[0].value;
+        userData.longitude = activeTextInputs[1].value;
+    }
+
+    // check that activated input is valid:
+    if ((userData.zipCode !== '') || (userData.latitude !== '' && userData.longitude !== '')) {
+        // generate new entry using the entered data:
+        generateNewEntry(userData);
     }
 };
 
@@ -165,12 +179,14 @@ const getWeatherIconSrc = () => {
 
 // Function called by the event listener of (Generate) button:
 const generateNewEntry = async (userData) => {
-    // get the zipcode value:
+    // get the location values:
     const zipCode = userData.zipCode;
+    const latitude = userData.latitude;
+    const longitude = userData.longitude;
 
     // fetch data from web API:
     try {
-        fetchWebData(baseURL, zipCode, apiKey)
+        fetchWebData(baseURL, apiKey, zipCode, latitude, longitude)
             .then(webAPIData => {
                 // construct desired data object to be posted:
                 const combinedData = extractDataToPost(userData, webAPIData);
@@ -191,9 +207,15 @@ const generateNewEntry = async (userData) => {
 };
 
 // Function to GET Web API Data:
-const fetchWebData = async (baseURL, zipCode, apiKey) => {
+const fetchWebData = async (baseURL, apiKey, zipCode, latitude, longitude) => {
     // construct the desired url from given pieces of information:
-    const url = `${baseURL}?zip=${zipCode}&appid=${apiKey}`;
+    let url = '';
+    if (zipCode !== '') {
+        url = `${baseURL}?zip=${zipCode}&appid=${apiKey}`;
+    }
+    else {
+        url = `${baseURL}?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+    }
 
     try {
         // fetch the data from the web api:
