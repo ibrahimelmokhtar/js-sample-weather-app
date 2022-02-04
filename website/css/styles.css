@@ -115,6 +115,21 @@ section.feeling__section textarea {
     border-radius: 10px;
 }
 
+section.location__section input[type='radio'],
+section.location__section div label {
+    cursor: pointer;
+}
+
+section.location__section div input[type='text']:enabled {
+    background: inherit;
+    cursor: auto;
+}
+
+section.location__section div input[type='text']:disabled {
+    background: #dddddd;
+    cursor: not-allowed;
+}
+
 /* ************************************************************** */
 /* ********************   Feeling Section   ********************* */
 /* ************************************************************** */

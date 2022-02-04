@@ -15,6 +15,7 @@ const inputFeeling = document.querySelector('#feelings');
 const btnGenerate = document.querySelector('#generate');
 
 const tempUnit = document.querySelector('#temp__unit__selection');
+const userInputSelection = document.querySelector('.location__section');
 
 // Data obtained from local server:
 let dataFromServer = {};
@@ -23,6 +24,50 @@ let dataFromServer = {};
  * End of Global Variables.
  * Start of Helper Functions.
  */
+
+// Change the state of the input selected by the user.
+const activateInputFields = (event) => {
+    // get the id of the event:
+    const inputID = event.target.id;
+
+    // check the id to limit the false clicks:
+    if (inputID === 'zip__selected' || inputID === 'coords__selected') {
+        // get all <div> elements inside <section> of class (location__section):
+        const inputFields = userInputSelection.querySelectorAll('div');
+
+        for (let i=0; i<inputFields.length; i++) {
+            // get the (radio) and (text) inputs:
+            const radioInput = inputFields[i].querySelector('input[type="radio"]');
+            const textInputs = inputFields[i].querySelectorAll('input[type="text"]');
+
+            // the current element id matches the selected one:
+            if (radioInput.getAttribute('id') === inputID) {
+                // add (active__input) class into the inputs container class list:
+                inputFields[i].classList.add('active__input');
+
+                // mark the (radio) input as checked:
+                radioInput.setAttribute('checked', 'true');
+
+                // remove (disabled) attribute from any (text) input:
+                for (let j=0; j<textInputs.length; j++) {
+                    textInputs[j].removeAttribute('disabled');
+                }
+            }
+            else {
+                // remove (active__input) class into the inputs container class list:
+                inputFields[i].classList.remove('active__input');
+
+                // remove (checked) attribute from (radio) input:
+                radioInput.removeAttribute('checked');
+
+                // add (disabled) attribute to all (text) input:
+                for (let j=0; j<textInputs.length; j++) {
+                    textInputs[j].setAttribute('disabled', 'true');
+                }
+            }
+        }
+    }
+};
 
 // Capture data entered by the user from user interface.
 const captureUserData = () => {
@@ -243,6 +288,9 @@ btnGenerate.addEventListener('click', captureUserData);
 
 // Event listener for temperature unit selection:
 tempUnit.addEventListener('click', changeTempUnit);
+
+// Event listener for the input selection ((zipcode) or (latitude/longitude)):
+userInputSelection.addEventListener('click', activateInputFields);
 
 /**
  * End of Event Listeners.
