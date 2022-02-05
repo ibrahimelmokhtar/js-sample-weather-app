@@ -25,9 +25,9 @@ let dataFromServer = {};
 
 // Change the state of the input selected by the user.
 const activateInputFields = (event, forceActivatedID='') => {
+    // get the id of the event or from the desired ID:
     let inputID = '';
     if (forceActivatedID === '') {
-        // get the id of the event:
         inputID = event.target.id;
     }
     else {
@@ -36,8 +36,11 @@ const activateInputFields = (event, forceActivatedID='') => {
 
     // check the id to limit the false clicks:
     if (inputID === 'zip__selected' || inputID === 'coords__selected') {
+        // Reset input fields while selecting input method:
+        resetInputFields();
+
         // get all <div> elements inside <section> of class (location__section):
-        const inputFields = userInputSelection.querySelectorAll('div');
+        const inputFields = userInputSelection.querySelectorAll('div.user__input');
 
         for (let i=0; i<inputFields.length; i++) {
             // get the (radio) and (text) inputs:
@@ -64,9 +67,10 @@ const activateInputFields = (event, forceActivatedID='') => {
                 // remove (checked) attribute from (radio) input:
                 radioInput.removeAttribute('checked');
 
-                // add (disabled) attribute to all (text) input:
+                // add (disabled) attribute to all (text) input and clear its value:
                 for (let j=0; j<textInputs.length; j++) {
                     textInputs[j].setAttribute('disabled', 'true');
+                    textInputs[j].value = '';
                 }
             }
         }
@@ -100,6 +104,123 @@ const getCurrentLocation = () => {
     }
 };
 
+// Reset the style of input fields back to normal state.
+const resetInputFields = () => {
+    // get all text input fields:
+    const textInputFields = userInputSelection.querySelectorAll('input[type="text"]');
+
+    // get all error messages:
+    const errorMessageContainers = userInputSelection.querySelectorAll('div.error__container');
+
+    // remove a specific class from input fields to reset its state to normal again:
+    for (let i=0; i<textInputFields.length; i++) {
+        textInputFields[i].classList.remove('empty__input__highlight');
+    }
+
+    // add a specific class from error messages to reset its state to hidden again:
+    for (let i=0; i<errorMessageContainers.length; i++) {
+        errorMessageContainers[i].classList.add('hide__error');
+    }
+};
+
+// Alert the user for an empty input field.
+const alertEmptyInput = (textInputField) => {
+    textInputField.classList.add('empty__input__highlight');
+};
+
+// Display error message according to the empty input fields.
+const displayErrorMessage = (activeErrorMessage, emptyFields, forceErrorMessage='') => {
+    // obtain main container element that contains the displayed data:
+    const displaySection = document.querySelector('.display__section');
+
+    // hide the main container that contains the displayed data:
+    displaySection.style.display = 'none';
+
+    // set error message according to empty input field:
+    let errorMessage = '';
+    switch (emptyFields) {
+        case 'zipcode':
+            errorMessage = 'Zip Code';
+            break;
+        case 'coords':
+            errorMessage = 'Latitude and/or Longitude';
+            break;
+    }
+
+    if (forceErrorMessage === '') {
+        forceErrorMessage = `${errorMessage} MUST be specified.`;
+    }
+
+    // set textContent value:
+    activeErrorMessage.querySelector('p').textContent = forceErrorMessage;
+
+    // display the error container:
+    activeErrorMessage.classList.remove('hide__error');
+};
+
+// create error message using web api error code and error message:
+const createErrorCodeMessage = (errorCode, errorMessage) => {
+    // Obtain specific elements from the DOM:
+    const activeRadioInput = userInputSelection.querySelector('div.active__input input[type="radio"]');
+    const activeTextInputs = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
+    const activeErrorMessage = userInputSelection.querySelector('div.active__input + div.error__container');
+
+    // construct appropriate error message:
+    const forceErrorMessage = `Error ${errorCode}:\t${errorMessage}`;
+
+    // highlight the empty inputs:
+    switch (activeRadioInput.id) {
+        case 'zip__selected':
+            alertEmptyInput(activeTextInputs[0]);
+            break;
+        case 'coords__selected':
+            alertEmptyInput(activeTextInputs[0]);
+            alertEmptyInput(activeTextInputs[1]);
+            break;
+    }
+
+    // display an error message:
+    displayErrorMessage(activeErrorMessage, '', forceErrorMessage);
+};
+
+// Check the data entered by the user.
+const checkUserInputs = (userData) => {
+    // Obtain specific elements from the DOM:
+    const activeRadioInput = userInputSelection.querySelector('div.active__input input[type="radio"]');
+    const activeTextInputs = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
+    const activeErrorMessage = userInputSelection.querySelector('div.active__input + div.error__container');
+
+    // highlight the empty inputs then display an error message:
+    switch (activeRadioInput.id) {
+        case 'zip__selected':
+            if (userData.zipCode === '') {
+                alertEmptyInput(activeTextInputs[0]);
+                displayErrorMessage(activeErrorMessage, 'zipcode');
+            }
+            break;
+
+        case 'coords__selected':
+            if (userData.latitude === '') {
+                alertEmptyInput(activeTextInputs[0]);
+                displayErrorMessage(activeErrorMessage, 'coords');
+            }
+            if (userData.longitude === '') {
+                alertEmptyInput(activeTextInputs[1]);
+                displayErrorMessage(activeErrorMessage, 'coords');
+            }
+            break;
+    }
+
+    // remove the user feelings if it's empty:
+    const displayedRows = document.querySelectorAll('div.row__displayed');
+    if (userData.feeling === '') {
+        displayedRows[2].style.display = 'none';
+    }
+    else {
+        displayedRows[2].style.display = 'flex';
+    }
+};
+
 // Capture data entered by the user from user interface.
 const captureUserData = () => {
     // create an object to capture user inputs from the website:
@@ -127,7 +248,10 @@ const captureUserData = () => {
         userData.longitude = activeTextInputs[1].value;
     }
 
-    // check that activated input is valid:
+    // check user's input is valid:
+    checkUserInputs(userData);
+
+    // double check that activated input is valid:
     if ((userData.zipCode !== '') || (userData.latitude !== '' && userData.longitude !== '')) {
         // generate new entry using the entered data:
         generateNewEntry(userData);
@@ -171,7 +295,7 @@ const convertToCelsius = () => {
 
 // Remove (active__degree) class.
 const removeActiveUnit = () => {
-    for (let i=0; i<tempUnit.children.length; i++){
+    for (let i=0; i<tempUnit.children.length; i++) {
         if (tempUnit.children[i].classList.contains('active__degree')) {
             tempUnit.children[i].classList.remove('active__degree');
         }
@@ -259,8 +383,7 @@ const fetchWebData = async (baseURL, apiKey, zipCode, latitude, longitude) => {
 
         // check if the response is done successfully:
         if (webAPIData.cod !== 200) {
-            console.clear();
-            window.alert(`Code: ${webAPIData.cod}\nMessage: ${webAPIData.message}`);
+            createErrorCodeMessage(webAPIData.cod, webAPIData.message);
         }
         else {
             return webAPIData;

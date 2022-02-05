@@ -97,8 +97,38 @@ main div#user__inputs__container {
     position: relative;
 }
 
+main div#user__inputs__container div.user__input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /* ************************************************************** */
-/* ********************   Zipcode Section   ********************* */
+/* **********************   Error Message   ********************* */
+/* ************************************************************** */
+div.error__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+    background-color: #2c4755;
+    color: #ff3333;
+
+    width: 100%;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    border: 3px solid #2c4755;
+    border-radius: 10px;
+}
+
+div.hide__error {
+    display: none;
+}
+
+/* ************************************************************** */
+/* **********************   Input Section   ********************* */
 /* ************************************************************** */
 section.location__section {
     height: 90%;
@@ -132,6 +162,14 @@ section.location__section div input[type='text']:enabled {
 section.location__section div input[type='text']:disabled {
     background: #dddddd;
     cursor: not-allowed;
+}
+
+section.location__section input[type='text'].empty__input__highlight {
+    border-color: #ff3333;
+}
+
+section.location__section button#current__location {
+    margin-top: 5px;
 }
 
 /* ************************************************************** */
