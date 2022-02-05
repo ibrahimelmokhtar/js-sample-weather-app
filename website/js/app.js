@@ -11,9 +11,9 @@ const baseURL = 'http://api.openweathermap.org/data/2.5/weather';
 
 // Obtain specific elements from the DOM:
 const btnGenerate = document.querySelector('#generate');
-
 const tempUnit = document.querySelector('#temp__unit__selection');
 const userInputSelection = document.querySelector('.location__section');
+const btnCurrentLocation = document.querySelector('#current__location');
 
 // Data obtained from local server:
 let dataFromServer = {};
@@ -24,9 +24,15 @@ let dataFromServer = {};
  */
 
 // Change the state of the input selected by the user.
-const activateInputFields = (event) => {
-    // get the id of the event:
-    const inputID = event.target.id;
+const activateInputFields = (event, forceActivatedID='') => {
+    let inputID = '';
+    if (forceActivatedID === '') {
+        // get the id of the event:
+        inputID = event.target.id;
+    }
+    else {
+        inputID = forceActivatedID;
+    }
 
     // check the id to limit the false clicks:
     if (inputID === 'zip__selected' || inputID === 'coords__selected') {
@@ -64,6 +70,33 @@ const activateInputFields = (event) => {
                 }
             }
         }
+    }
+};
+
+// Get current geolocation of the user:
+const getCurrentLocation = () => {
+    window.alert('To use this feature, you must allow this website to know your location.');
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(location => {      // success call.
+            // activate latitude/longitude input section:
+            activateInputFields('', 'coords__selected');
+
+            // obtain text inputs for (latitude) and (longitude):
+            const textInputFields = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
+
+            // set the value for (latitude) and (longitude):
+            textInputFields[0].value = location.coords.latitude;
+            textInputFields[1].value = location.coords.longitude;
+        }, error => {   // just in case an ERROR happened.
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    window.alert('Website do NOT have the permission to use you location.');
+                    break;
+            }
+        });
+    } else {
+        window.alert('Geolocation is not supported by this browser.');
     }
 };
 
@@ -313,6 +346,9 @@ tempUnit.addEventListener('click', changeTempUnit);
 
 // Event listener for the input selection ((zipcode) or (latitude/longitude)):
 userInputSelection.addEventListener('click', activateInputFields);
+
+// Event listener for the (Current Location) button:
+btnCurrentLocation.addEventListener('click', getCurrentLocation);
 
 /**
  * End of Event Listeners.

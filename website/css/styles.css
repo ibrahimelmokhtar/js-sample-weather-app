@@ -12,6 +12,10 @@
     font-weight: 300;
 }
 
+i[class^="fa"] {
+    margin-right: 10px;
+}
+
 /* ************************************************************** */
 /* *************************   Header   ************************* */
 /* ************************************************************** */
@@ -164,7 +168,6 @@ main button {
 
 main button span {
     font-weight: 600;
-    margin-left: 10px;
 }
 
 main button:hover {
@@ -202,6 +205,13 @@ section.display__section div.row__displayed {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+}
+
+section.display__section div.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 
