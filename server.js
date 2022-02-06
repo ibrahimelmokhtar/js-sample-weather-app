@@ -29,7 +29,7 @@ app.use(cors());
 app.use(express.static('./website'));
 
 // Spin up the server:
-const port = 8080;
+const port = (process.env.PORT || 5000);    // required for Heroku hosting.
 const hostName = '127.0.0.1';
 
 // Callback to debug:
