@@ -7,7 +7,7 @@ const apiToken = '95ed0460b8368f3354d9bf96c2a9b0b3';
 const apiKey = `${apiToken}&units=imperial`;
 
 // Base URL for OpenWeatherMap API:
-const baseURL = 'http://api.openweathermap.org/data/2.5/weather';
+const baseURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Obtain specific elements from the DOM:
 const btnGenerate = document.querySelector('#generate');
@@ -327,7 +327,7 @@ const changeTempUnit = (event) => {
 // Get the source URL for the weather icon.
 const getWeatherIconSrc = () => {
     const weatherIconCode = dataFromServer.weatherIcon;
-    const weatherIconSrc = `http://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
+    const weatherIconSrc = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
 
     return weatherIconSrc;
 };
