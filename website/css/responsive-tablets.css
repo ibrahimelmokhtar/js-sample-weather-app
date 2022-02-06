@@ -1,0 +1,67 @@
+
+/* Tablet devices */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* ************************************************************** */
+    /* **************   General Rules for Sections   **************** */
+    /* ************************************************************** */
+    section h2.section__title {
+        padding: 5px 15px;
+        font-size: 1em;
+        left: 25px;
+    }
+
+    /* ************************************************************** */
+    /* **********************   Input Section   ********************* */
+    /* ************************************************************** */
+    section.location__section div.user__input {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    div.user__input span {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    section.location__section div input[type='text'] {
+        width:70%;
+    }
+
+    /* ************************************************************** */
+    /* ********************   Display Section   ********************* */
+    /* ************************************************************** */
+    section.display__section div.row__displayed {
+        flex-direction: row;
+    }
+
+    section.display__section div.item i {
+        width: fit-content;
+        margin-left: 0;
+    }
+
+    section.display__section div.item {
+        width: fit-content;
+        justify-content: space-between;
+    }
+
+    section.display__section h3#temp {
+        width: 50%;
+        justify-content: center;
+    }
+
+    /* ************************************************************** */
+    /* *************************   Footer   ************************* */
+    /* ************************************************************** */
+    footer {
+        padding: 0 30px;
+        font-size: 1em;
+    }
+
+    footer div#contact__info {
+        width: 100px;
+    }
+}

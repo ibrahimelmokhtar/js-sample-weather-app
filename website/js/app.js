@@ -36,7 +36,7 @@ const activateInputFields = (event, forceActivatedID='') => {
 
     // check the id to limit the false clicks:
     if (inputID === 'zip__selected' || inputID === 'coords__selected') {
-        // Reset input fields while selecting input method:
+        // Reset input fields and error messages while selecting input method:
         resetInputFields();
 
         // get all <div> elements inside <section> of class (location__section):
@@ -104,7 +104,7 @@ const getCurrentLocation = () => {
     }
 };
 
-// Reset the style of input fields back to normal state.
+// Reset the style of input fields and error messages back to normal state.
 const resetInputFields = () => {
     // get all text input fields:
     const textInputFields = userInputSelection.querySelectorAll('input[type="text"]');
@@ -253,6 +253,9 @@ const captureUserData = () => {
 
     // double check that activated input is valid:
     if ((userData.zipCode !== '') || (userData.latitude !== '' && userData.longitude !== '')) {
+        // Reset input fields and error messages before generating new entry:
+        resetInputFields();
+
         // generate new entry using the entered data:
         generateNewEntry(userData);
     }

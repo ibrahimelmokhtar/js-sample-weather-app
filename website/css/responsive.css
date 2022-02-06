@@ -1,6 +1,6 @@
 
-/* Smartphone devices */
-@media screen and (max-width: 767px) {
+/* Smartphone and Tablet devices */
+@media screen and (max-width: 1023px) {
     /* ************************************************************** */
     /* *************************   Header   ************************* */
     /* ************************************************************** */
@@ -49,6 +49,7 @@
     section.location__section div.user__input {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
 
     section.location__section div input[type='text'] {
@@ -108,7 +109,11 @@
     footer {
         position: relative;
         bottom: 0;
-        padding: 0 5px;
+        font-size: 0.8em;
+    }
+
+    footer div#contact__info {
+        width: 60px;
     }
 
     footer div#footer__quote span {
