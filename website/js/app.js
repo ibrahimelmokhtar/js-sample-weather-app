@@ -79,9 +79,9 @@ const activateInputFields = (event, forceActivatedID='') => {
 
 // Get current geolocation of the user:
 const getCurrentLocation = () => {
-    window.alert('To use this feature, you must allow this website to know your location.');
-
+    // check that navigator.geolocation is supported by the browser:
     if (navigator.geolocation) {
+        // get current location:
         navigator.geolocation.getCurrentPosition(location => {      // success call.
             // activate latitude/longitude input section:
             activateInputFields('', 'coords__selected');

@@ -1,0 +1,117 @@
+
+/* Smartphone devices */
+@media screen and (max-width: 767px) {
+    /* ************************************************************** */
+    /* *************************   Header   ************************* */
+    /* ************************************************************** */
+    header {
+        position: absolute;
+        top: 0;
+    }
+
+    header h1.headline {
+        font-size: 1.5em;
+    }
+
+    /* ************************************************************** */
+    /* **************   General Rules for Sections   **************** */
+    /* ************************************************************** */
+    main {
+        margin: 10vh 20px;
+        height: fit-content;
+    }
+
+    section h2.section__title {
+        font-size: 0.9em;
+        padding: 5px 10px;
+        left: 15px;
+    }
+
+    main div#user__inputs__container {
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    /* ************************************************************** */
+    /* **********************   Error Message   ********************* */
+    /* ************************************************************** */
+    div.error__container {
+        font-size: 0.9em;
+    }
+
+    /* ************************************************************** */
+    /* **********************   Input Section   ********************* */
+    /* ************************************************************** */
+    section.location__section {
+        width: 100%;
+    }
+
+    section.location__section div.user__input {
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.location__section div input[type='text'] {
+        width: 100%;
+    }
+
+    /* ************************************************************** */
+    /* ********************   Feeling Section   ********************* */
+    /* ************************************************************** */
+    section.feeling__section {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    section.feeling__section textarea {
+        width: 100%;
+    }
+
+    /* ************************************************************** */
+    /* ********************   Display Section   ********************* */
+    /* ************************************************************** */
+    section.display__section {
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    section.display__section div.row__displayed {
+        flex-direction: column-reverse;
+    }
+
+    section.display__section div.item i {
+        width: 40px;
+        margin-right: 10px;
+        margin-left: 20px;
+    }
+
+    section.display__section div.item {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    section.display__section h3#temp {
+        width: 80%;
+        justify-content: space-evenly;
+    }
+
+    section.display__section span#temp__value,
+    section.display__section span#temp__symbol {
+        font-size: 1.5rem;
+    }
+
+    /* ************************************************************** */
+    /* *************************   Footer   ************************* */
+    /* ************************************************************** */
+    footer {
+        position: relative;
+        bottom: 0;
+        padding: 0 5px;
+    }
+
+    footer div#footer__quote span {
+        font-size: 1.2em;
+    }
+}

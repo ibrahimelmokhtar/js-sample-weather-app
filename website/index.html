@@ -20,6 +20,7 @@
 
     <!-- Load Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive-smartphones.css">
   </head>
   <body>
     <!-- Page Header -->
@@ -38,9 +39,11 @@
 
           <!-- Zip Code Input -->
           <div class="user__input active__input">
-            <input type="radio" name="input__selection" id="zip__selected" value="zipcode" checked>
-            <label for="zip__selected">zip code:</label>
-            <input type="text" id="zip" placeholder="Enter zip code here ...">
+            <span>
+              <input type="radio" name="input__selection" id="zip__selected" value="zipcode" checked>
+              <label for="zip__selected">zip code:</label>
+              <input type="text" id="zip" placeholder="Enter zip code here ...">
+            </span>
           </div>
           <div class="error__container hide__error" id="zipcode__error">
             <i class="fas fa-exclamation-triangle fa-x"></i>
@@ -49,11 +52,15 @@
 
           <!-- Latitude and Longitude Inputs -->
           <div class="user__input">
-            <input type="radio" name="input__selection" id="coords__selected" value="coords">
-            <label for="coords__selected">lat:</label>
-            <input type="text" id="latitude" placeholder="Enter latitude here ..." disabled>
-            <label for="coords__selected">, lon:</label>
-            <input type="text" id="longitude" placeholder="Enter longitude here ..." disabled>
+            <span>
+              <input type="radio" name="input__selection" id="coords__selected" value="coords">
+              <label for="coords__selected">lat:</label>
+              <input type="text" id="latitude" placeholder="Enter latitude here ..." disabled>
+            </span>
+            <span>
+              <label for="coords__selected">, lon:</label>
+              <input type="text" id="longitude" placeholder="Enter longitude here ..." disabled>
+            </span>
           </div>
           <div class="error__container hide__error" id="coords__error">
             <i class="fas fa-exclamation-triangle fa-x"></i>
@@ -92,8 +99,10 @@
             </div>
 
             <h3 id="temp">
-              <span id="temp__value">temp_placeholder</span>
-              <span id="temp__symbol">&deg;</span>
+              <span id="temp__displayed">
+                <span id="temp__value">temp_placeholder</span>
+                <span id="temp__symbol">&deg;</span>
+              </span>
               <span id="temp__unit__selection">
                 <span id="temp__Fahrenheit" class="active__degree">F</span>
                 <span>/</span>
