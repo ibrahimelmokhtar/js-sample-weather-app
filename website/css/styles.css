@@ -1,20 +1,23 @@
 /* Load Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* General rules */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 
     font-size: 1em;
     font-weight: 300;
 }
 
+
+/* for any Font Awesome Icon */
 i[class^="fa"] {
     margin-right: 10px;
 }
+
 
 /* ************************************************************** */
 /* *************************   Header   ************************* */
@@ -31,13 +34,15 @@ header {
     justify-content: center;
 }
 
+
 /* Page Main Title */
-header h1.headline {
+.headline {
     color: #ffffff;
     font-size: 2em;
     font-weight: 400;
     text-transform: capitalize;
 }
+
 
 /* ************************************************************** */
 /* **************   General Rules for Sections   **************** */
@@ -55,7 +60,9 @@ main {
     align-items: initial;
 }
 
-section.section__container {
+
+/* Section Container */
+.section__container {
     border-color: #2c4755;
     border-style: solid;
     border-radius: 10px;
@@ -66,7 +73,9 @@ section.section__container {
     position: relative;
 }
 
-section h2.section__title {
+
+/* Section Title */
+.section__title {
     border-color: #ffffff;
     border-style: none solid;
 
@@ -83,29 +92,17 @@ section h2.section__title {
     left: 25px;
 }
 
-section.holder,
-section h2.section__title {
+
+.section__container,
+.section__title {
     border-width: 5px;
 }
 
-main div#user__inputs__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    position: relative;
-}
-
-main div#user__inputs__container div.user__input {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
 
 /* ************************************************************** */
 /* **********************   Error Message   ********************* */
 /* ************************************************************** */
-div.error__container {
+.error__container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -123,22 +120,43 @@ div.error__container {
     border-radius: 10px;
 }
 
-div.hide__error {
+
+/* Hidden Error Message */
+.hide__error {
     display: none;
 }
 
 /* ************************************************************** */
 /* **********************   Input Section   ********************* */
 /* ************************************************************** */
-section.location__section {
+#user__inputs__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    position: relative;
+}
+
+
+.location__section {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
 }
 
-section.location__section input,
-section.feeling__section textarea {
+
+/* Single User Input Option: (ZipCode) or (Latitude/Longitude) */
+.user__input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+/* Text Input Fields */
+.location__section input,
+.feeling__section textarea {
     color: #2c4755;
 
     padding: 10px;
@@ -147,36 +165,47 @@ section.feeling__section textarea {
     border-radius: 10px;
 }
 
-section.location__section input[type='radio'],
-section.location__section div label {
+
+.location__section input[type="radio"],
+.location__section div label {
     cursor: pointer;
     padding: 5px;
 }
 
-section.location__section div input[type='text']:enabled {
+
+/* Enabled Text Input Fields */
+.location__section div input[type="text"]:enabled {
     background: inherit;
     cursor: auto;
 }
 
-section.location__section div input[type='text']:disabled {
+
+/* Disabled Text Input Fields */
+.location__section div input[type="text"]:disabled {
     background: #dddddd;
     cursor: not-allowed;
 }
 
-section.location__section input[type='text'].empty__input__highlight {
+
+/* Highlight Empty Text Input Fields */
+.location__section input[type="text"].empty__input__highlight {
     border-color: #ff3333;
 }
 
-section.location__section button#current__location {
+
+/* Get Current Location Button */
+#current__location {
     margin-top: 5px;
 }
+
 
 /* ************************************************************** */
 /* ********************   Feeling Section   ********************* */
 /* ************************************************************** */
-section.feeling__section {
+.feeling__section {
     width: fit-content;
 }
+
 
 /* ************************************************************** */
 /* ********************   Generate Button   ********************* */
@@ -203,9 +232,12 @@ main button {
     transition-property: background-color, color;
 }
 
+
+/* Button Label */
 main button span {
     font-weight: 600;
 }
+
 
 main button:hover {
     cursor: pointer;
@@ -213,10 +245,11 @@ main button:hover {
     color: #2c4755;
 }
 
+
 /* ************************************************************** */
 /* ********************   Display Section   ********************* */
 /* ************************************************************** */
-section.display__section {
+.display__section {
     display: none;
 
     align-self: center;
@@ -225,7 +258,9 @@ section.display__section {
     height: 70%;
 }
 
-section.display__section div#entry__container {
+
+/* Display Inner Container */
+#entry__container {
     height: 100%;
 
     display: flex;
@@ -236,7 +271,9 @@ section.display__section div#entry__container {
     color: #2c4755;
 }
 
-section.display__section div.row__displayed {
+
+/* Single Displayed Row */
+.row__displayed {
     width: 100%;
 
     display: flex;
@@ -245,15 +282,18 @@ section.display__section div.row__displayed {
     align-items: center;
 }
 
-section.display__section div.item {
+
+/* Single Displayed Item */
+.item {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-/* Temperature */
-section.display__section h3#temp {
+
+/* Displayed Temperature */
+#temp {
     width: 50%;
 
     display: flex;
@@ -262,22 +302,28 @@ section.display__section h3#temp {
     align-items: center;
 }
 
-section.display__section span#temp__value,
-section.display__section span#temp__symbol {
+
+#temp__value,
+#temp__symbol {
     font-size: 2rem;
 }
 
-section.display__section span#temp__unit__selection {
+
+/* Selection Container (F)/(C) */
+#temp__unit__selection {
     margin-left: 10px;
 }
 
-section.display__section span#temp__Fahrenheit,
-section.display__section span#temp__Celsius {
+
+#temp__Fahrenheit,
+#temp__Celsius {
     padding: 0 8px;
     cursor: pointer;
 }
 
-section.display__section span.active__degree {
+
+/* Active Degree to be displayed */
+.active__degree {
     background-color: #2c4755;
     color: #ffffff;
 
@@ -286,6 +332,7 @@ section.display__section span.active__degree {
     transition-duration: 0.5s;
     transition-property: background-color, color;
 }
+
 
 /* ************************************************************** */
 /* *************************   Footer   ************************* */
@@ -307,8 +354,9 @@ footer {
     justify-content: space-between;
 }
 
+
 /* Personal Contact Info */
-footer div#contact__info {
+#contact__info {
     width: 80px;
     display: flex;
     flex-direction: row;
@@ -316,17 +364,20 @@ footer div#contact__info {
     align-items: center;
 }
 
-footer div#contact__info a {
+
+#contact__info a {
     color: #ffffff;
     transition: color 0.5s;
 }
 
-footer div#contact__info a:hover {
+
+#contact__info a:hover {
     color: #ff6347;
 }
 
-/* Page Footer Quote */
-footer div#footer__quote span {
+
+/* Page Footer Quote (Heart Shape) */
+#footer__quote span {
     color: #ff6347;
     font-size: 1.5em;
 }

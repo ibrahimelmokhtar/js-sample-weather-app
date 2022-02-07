@@ -46,6 +46,7 @@
               <input type="text" id="zip" placeholder="Enter zip code here ...">
             </span>
           </div>
+          <!-- Error Message for Zip Code Input -->
           <div class="error__container hide__error" id="zipcode__error">
             <i class="fas fa-exclamation-triangle fa-x"></i>
             <p>message_placeholder</p>
@@ -53,22 +54,25 @@
 
           <!-- Latitude and Longitude Inputs -->
           <div class="user__input">
+            <!-- Latitude Input -->
             <span>
               <input type="radio" name="input__selection" id="coords__selected" value="coords">
               <label for="coords__selected">lat:</label>
               <input type="text" id="latitude" placeholder="Enter latitude here ..." disabled>
             </span>
+            <!-- Longitude Input -->
             <span>
               <label for="coords__selected">, lon:</label>
               <input type="text" id="longitude" placeholder="Enter longitude here ..." disabled>
             </span>
           </div>
+          <!-- Error Message for Latitude and Longitude Input -->
           <div class="error__container hide__error" id="coords__error">
             <i class="fas fa-exclamation-triangle fa-x"></i>
             <p class="error__message">message_placeholder</p>
           </div>
 
-          <!-- Get Current Location Input -->
+          <!-- Get Current Location Button -->
           <button id="current__location" type="submit" title="Get Current Location">
             <i class="fas fa-map-marked-alt fa-2x"></i>
             <span>Current Location</span>
@@ -93,17 +97,21 @@
         <h2 class="section__title">Most Recent Entry:</h2>
 
         <div id="entry__container">
+          <!-- 1st. Row to be displayed -->
           <div class="row__displayed">
+            <!-- Display the Date -->
             <div class="item">
               <i class="fas fa-clock fa-2x"></i>
               <h3 id="date">date_placeholder</h3>
             </div>
 
+            <!-- Display Weather Temperature -->
             <h3 id="temp">
               <span id="temp__displayed">
                 <span id="temp__value">temp_placeholder</span>
                 <span id="temp__symbol">&deg;</span>
               </span>
+              <!-- Select (F) or (C) degrees -->
               <span id="temp__unit__selection">
                 <span id="temp__Fahrenheit" class="active__degree">F</span>
                 <span>/</span>
@@ -111,23 +119,29 @@
               </span>
             </h3>
 
+            <!-- Display Weather Icon -->
             <h3 id="weather__icon">
               <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="Weather Icon">
             </h3>
           </div>
 
+          <!-- 2nd. Row to be displayed -->
           <div class="row__displayed">
+            <!-- Display Weather Place -->
             <div class="item">
               <i class="fas fa-map-marker-alt fa-2x"></i>
               <h3 id="weather__place">place_placeholder</h3>
             </div>
+            <!-- Display Weather Description -->
             <div class="item">
               <i class="fas fa-comments fa-2x"></i>
               <h3 id="weather__description">description_placeholder</h3>
             </div>
           </div>
 
+          <!-- 3rd. Row to be displayed -->
           <div class="row__displayed">
+            <!-- Display User Feelings -->
             <div class="item">
               <i class="fas fa-user-edit fa-2x"></i>
               <h3 id="content">feeling_placeholder</h3>

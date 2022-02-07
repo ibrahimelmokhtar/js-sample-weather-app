@@ -23,7 +23,12 @@ let dataFromServer = {};
  * Start of Helper Functions.
  */
 
-// Change the state of the input selected by the user.
+
+/**
+ * @description Change the state of the input selected by the user.
+ * @param {Event} event
+ * @param {String} forceActivatedID
+ */
 const activateInputFields = (event, forceActivatedID='') => {
     // get the id of the event or from the desired ID:
     let inputID = '';
@@ -40,7 +45,7 @@ const activateInputFields = (event, forceActivatedID='') => {
         resetInputFields();
 
         // get all <div> elements inside <section> of class (location__section):
-        const inputFields = userInputSelection.querySelectorAll('div.user__input');
+        const inputFields = userInputSelection.querySelectorAll('.user__input');
 
         for (let i=0; i<inputFields.length; i++) {
             // get the (radio) and (text) inputs:
@@ -77,7 +82,10 @@ const activateInputFields = (event, forceActivatedID='') => {
     }
 };
 
-// Get current geolocation of the user:
+
+/**
+ * @description Get current geolocation of the user.
+ */
 const getCurrentLocation = () => {
     // check that navigator.geolocation is supported by the browser:
     if (navigator.geolocation) {
@@ -87,7 +95,7 @@ const getCurrentLocation = () => {
             activateInputFields('', 'coords__selected');
 
             // obtain text inputs for (latitude) and (longitude):
-            const textInputFields = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
+            const textInputFields = userInputSelection.querySelectorAll('.active__input input[type="text"]');
 
             // set the value for (latitude) and (longitude):
             textInputFields[0].value = location.coords.latitude;
@@ -99,18 +107,22 @@ const getCurrentLocation = () => {
                     break;
             }
         });
-    } else {
+    }
+    else {
         window.alert('Geolocation is not supported by this browser.');
     }
 };
 
-// Reset the style of input fields and error messages back to normal state.
+
+/**
+ * @description Reset the style of input fields and error messages back to normal state.
+ */
 const resetInputFields = () => {
     // get all text input fields:
     const textInputFields = userInputSelection.querySelectorAll('input[type="text"]');
 
     // get all error messages:
-    const errorMessageContainers = userInputSelection.querySelectorAll('div.error__container');
+    const errorMessageContainers = userInputSelection.querySelectorAll('.error__container');
 
     // remove a specific class from input fields to reset its state to normal again:
     for (let i=0; i<textInputFields.length; i++) {
@@ -123,12 +135,23 @@ const resetInputFields = () => {
     }
 };
 
-// Alert the user for an empty input field.
+
+
+/**
+ * @description Alert the user for an empty input field.
+ * @param {HTMLInputElement} textInputField
+ */
 const alertEmptyInput = (textInputField) => {
     textInputField.classList.add('empty__input__highlight');
 };
 
-// Display error message according to the empty input fields.
+
+/**
+ * @description Display error message according to the empty input fields.
+ * @param {HTMLElement} activeErrorMessage
+ * @param {String} emptyFields
+ * @param {String} forceErrorMessage
+ */
 const displayErrorMessage = (activeErrorMessage, emptyFields, forceErrorMessage='') => {
     // obtain main container element that contains the displayed data:
     const displaySection = document.querySelector('.display__section');
@@ -158,12 +181,17 @@ const displayErrorMessage = (activeErrorMessage, emptyFields, forceErrorMessage=
     activeErrorMessage.classList.remove('hide__error');
 };
 
-// create error message using web api error code and error message:
+
+/**
+ * @description Create error message using web api error code and error message.
+ * @param {String} errorCode
+ * @param {String} errorMessage
+ */
 const createErrorCodeMessage = (errorCode, errorMessage) => {
     // Obtain specific elements from the DOM:
-    const activeRadioInput = userInputSelection.querySelector('div.active__input input[type="radio"]');
-    const activeTextInputs = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
-    const activeErrorMessage = userInputSelection.querySelector('div.active__input + div.error__container');
+    const activeRadioInput = userInputSelection.querySelector('.active__input input[type="radio"]');
+    const activeTextInputs = userInputSelection.querySelectorAll('.active__input input[type="text"]');
+    const activeErrorMessage = userInputSelection.querySelector('.active__input + .error__container');
 
     // construct appropriate error message:
     const forceErrorMessage = `Error ${errorCode}:\t${errorMessage}`;
@@ -183,12 +211,16 @@ const createErrorCodeMessage = (errorCode, errorMessage) => {
     displayErrorMessage(activeErrorMessage, '', forceErrorMessage);
 };
 
-// Check the data entered by the user.
+
+/**
+ * @description Check the data entered by the user.
+ * @param {Object} userData
+ */
 const checkUserInputs = (userData) => {
     // Obtain specific elements from the DOM:
-    const activeRadioInput = userInputSelection.querySelector('div.active__input input[type="radio"]');
-    const activeTextInputs = userInputSelection.querySelectorAll('div.active__input input[type="text"]');
-    const activeErrorMessage = userInputSelection.querySelector('div.active__input + div.error__container');
+    const activeRadioInput = userInputSelection.querySelector('.active__input input[type="radio"]');
+    const activeTextInputs = userInputSelection.querySelectorAll('.active__input input[type="text"]');
+    const activeErrorMessage = userInputSelection.querySelector('.active__input + .error__container');
 
     // highlight the empty inputs then display an error message:
     switch (activeRadioInput.id) {
@@ -212,7 +244,7 @@ const checkUserInputs = (userData) => {
     }
 
     // remove the user feelings if it's empty:
-    const displayedRows = document.querySelectorAll('div.row__displayed');
+    const displayedRows = document.querySelectorAll('.row__displayed');
     if (userData.feeling === '') {
         displayedRows[2].style.display = 'none';
     }
@@ -221,7 +253,10 @@ const checkUserInputs = (userData) => {
     }
 };
 
-// Capture data entered by the user from user interface.
+
+/**
+ * @description Capture data entered by the user from user interface.
+ */
 const captureUserData = () => {
     // create an object to capture user inputs from the website:
     const userData = {
@@ -236,7 +271,7 @@ const captureUserData = () => {
     userData.feeling = inputFeeling.value;
 
     // Obtain input elements from the DOM:
-    const activeInputContainer = userInputSelection.querySelector('div.active__input');
+    const activeInputContainer = userInputSelection.querySelector('.active__input');
     const activeTextInputs = activeInputContainer.querySelectorAll('input[type="text"]');
 
     // capture the activated input fields:
@@ -261,14 +296,25 @@ const captureUserData = () => {
     }
 };
 
-// Extract specific parts from date object found in the Web API data.
+
+/**
+ * @description Extract specific parts from date object found in the Web API data.
+ * @param {String} dateString
+ * @returns {String} Desired date formatting.
+ */
 const extractDate = (dateString) => {
     const date = dateString.split(' ').slice(0, 4).join(' ');
 
     return date;
 };
 
-// Extract specific data from both user data and WEB API data.
+
+/**
+ * @description Extract specific data from both user data and WEB API data.
+ * @param {Object} userData
+ * @param {Object} webAPIData
+ * @returns {Object} Combination of these TWO objects.
+ */
 const extractDataToPost = (userData, webAPIData) => {
     // extract date from Web API data, formated as: (DayName MONTH DAY YEAR):
     const date = extractDate(Date(webAPIData.dt));
@@ -286,17 +332,28 @@ const extractDataToPost = (userData, webAPIData) => {
     return combinedData;
 };
 
-// Display appropriate error message.
+
+/**
+ * @description Display appropriate error message.
+ * @param {Error} error
+ */
 const handleErrors = (error) => {
     console.log(`error: ${error}`);
 };
 
-// Convert Fahrenheit degree into Celsius degree.
+
+/**
+ * @description Convert Fahrenheit degree into Celsius degree.
+ * @returns {Number} Temperature in Celsius.
+ */
 const convertToCelsius = () => {
     return ((dataFromServer.tempInFahrenheit-32)*(5/9)).toFixed(2);
 };
 
-// Remove (active__degree) class.
+
+/**
+ * @description Remove (active__degree) class.
+ */
 const removeActiveUnit = () => {
     for (let i=0; i<tempUnit.children.length; i++) {
         if (tempUnit.children[i].classList.contains('active__degree')) {
@@ -305,10 +362,14 @@ const removeActiveUnit = () => {
     }
 };
 
-// Change the unit of the displayed temperature.
+
+/**
+ * @description Change the unit of the displayed temperature.
+ * @param {Event} event
+ */
 const changeTempUnit = (event) => {
     // Obtain the required element for displaying temp value:
-    const tempDisplayed = document.querySelector('.display__section span#temp__value');
+    const tempDisplayed = document.querySelector('#temp__value');
 
     switch (event.target.id) {
         case 'temp__Fahrenheit':
@@ -324,7 +385,11 @@ const changeTempUnit = (event) => {
     }
 };
 
-// Get the source URL for the weather icon.
+
+/**
+ * @description Get the source URL for the weather icon.
+ * @returns {String} URL of the desired icon.
+ */
 const getWeatherIconSrc = () => {
     const weatherIconCode = dataFromServer.weatherIcon;
     const weatherIconSrc = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
@@ -332,12 +397,17 @@ const getWeatherIconSrc = () => {
     return weatherIconSrc;
 };
 
+
 /**
  * End of Helper Functions.
  * Start of Main Finctions.
  */
 
-// Function called by the event listener of (Generate) button:
+
+/**
+ * @description Function called by the event listener of (Generate) button.
+ * @param {Object} userData
+ */
 const generateNewEntry = async (userData) => {
     // get the location values:
     const zipCode = userData.zipCode;
@@ -366,7 +436,16 @@ const generateNewEntry = async (userData) => {
     }
 };
 
-// Function to GET Web API Data:
+
+/**
+ * @description GET data from the Web API.
+ * @param {String} baseURL
+ * @param {String} apiKey
+ * @param {String} zipCode
+ * @param {String} latitude
+ * @param {String} longitude
+ * @returns {Object} Data fetched from Web API.
+ */
 const fetchWebData = async (baseURL, apiKey, zipCode, latitude, longitude) => {
     // construct the desired url from given pieces of information:
     let url = '';
@@ -397,7 +476,13 @@ const fetchWebData = async (baseURL, apiKey, zipCode, latitude, longitude) => {
     }
 };
 
-// Function to POST data:
+
+/**
+ * @description POST data into the server.
+ * @param {String} url
+ * @param {Object} data
+ * @returns {Object} Data posted to the server.
+ */
 const postData = async (url, data) => {
     const requestHeader = {
         method: 'POST',
@@ -420,7 +505,11 @@ const postData = async (url, data) => {
     }
 };
 
-// Function to GET Project Data:
+
+/**
+ * @description GET data from the server.
+ * @param {String} url
+ */
 const getData = async (url) => {
     try {
         const response = await fetch(url);
@@ -433,18 +522,21 @@ const getData = async (url) => {
     }
 };
 
-// Update UI with the final desired data:
+
+/**
+ * @description Update UI with the final desired data.
+ */
 const updateUI = () => {
     // obtain main container element that contains the displayed data:
     const displaySection = document.querySelector('.display__section');
 
     // obtain required elements to be manipulated:
-    const dateDisplayed = document.querySelector('.display__section h3#date');
-    const tempDisplayed = document.querySelector('.display__section h3#temp span#temp__value');
-    const contentDisplayed = document.querySelector('.display__section h3#content');
-    const placeDisplayed = document.querySelector('.display__section h3#weather__place');
-    const descriptionDisplayed = document.querySelector('.display__section h3#weather__description');
-    const iconDisplayed = document.querySelector('.display__section h3#weather__icon img');
+    const dateDisplayed = document.querySelector('#date');
+    const tempDisplayed = document.querySelector('#temp__value');
+    const contentDisplayed = document.querySelector('#content');
+    const placeDisplayed = document.querySelector('#weather__place');
+    const descriptionDisplayed = document.querySelector('#weather__description');
+    const iconDisplayed = document.querySelector('#weather__icon img');
 
     // update the displayed values:
     dateDisplayed.textContent = dataFromServer.date;
@@ -459,10 +551,12 @@ const updateUI = () => {
     displaySection.style.display = 'block';
 };
 
+
 /**
  * End of Main Functions.
  * Start of Event Listeners.
  */
+
 
 // Event listener for the (Generate) button:
 btnGenerate.addEventListener('click', captureUserData);

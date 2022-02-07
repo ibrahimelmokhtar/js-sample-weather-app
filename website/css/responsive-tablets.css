@@ -4,54 +4,72 @@
     /* ************************************************************** */
     /* **************   General Rules for Sections   **************** */
     /* ************************************************************** */
-    section h2.section__title {
+
+    /* Section Title */
+    .section__title {
         padding: 5px 15px;
         font-size: 1em;
         left: 25px;
     }
 
+
     /* ************************************************************** */
     /* **********************   Input Section   ********************* */
     /* ************************************************************** */
-    section.location__section div.user__input {
+
+    /* Single User Input Option: (ZipCode) or (Latitude/Longitude) */
+    .user__input {
         width: 100%;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    div.user__input span {
+
+    /* Single User Input: (ZipCode), (Latitude) or (Longitude) */
+    .user__input span {
         width: 50%;
         display: flex;
         flex-direction: row;
         align-items: center;
     }
 
-    section.location__section div input[type='text'] {
-        width:70%;
+    /* Text Input Fields */
+    .location__section div input[type="text"] {
+        width: 70%;
     }
+
 
     /* ************************************************************** */
     /* ********************   Display Section   ********************* */
     /* ************************************************************** */
-    section.display__section div.row__displayed {
+
+    /* Single Displayed Row */
+    .row__displayed {
         flex-direction: row;
     }
 
-    section.display__section div.item i {
-        width: fit-content;
-        margin-left: 0;
-    }
 
-    section.display__section div.item {
+    /* Single Displayed Item */
+    .item {
         width: fit-content;
         justify-content: space-between;
     }
 
-    section.display__section h3#temp {
+
+    /* Icon of the displayed Item */
+    .item i {
+        width: fit-content;
+        margin-left: 0;
+    }
+
+
+    /* Displayed Temperature */
+    #temp {
         width: 50%;
         justify-content: center;
     }
+
 
     /* ************************************************************** */
     /* *************************   Footer   ************************* */
@@ -61,7 +79,9 @@
         font-size: 1em;
     }
 
-    footer div#contact__info {
+
+    /* Personal Contact Info */
+    #contact__info {
         width: 100px;
     }
 }
